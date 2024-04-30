@@ -1,3 +1,4 @@
+import { existsSync } from "fs";
 import { readFile } from "fs/promises";
 import MP3Tag from "mp3tag.js";
 
@@ -8,6 +9,7 @@ interface Tags {
 }
 
 export async function getMP3(fileName: string): Promise<MP3Tag> {
+  if (!existsSync(`songs/${fileName}`)) throw new Error("File not found");
   const buf = await readFile(`songs/${fileName}`);
   const mp3 = new MP3Tag(buf);
   mp3.read();
