@@ -6,6 +6,7 @@ interface Tags {
   name?: string;
   album?: string;
   artist?: string;
+  isrc?: string;
 }
 
 export async function getMP3(fileName: string): Promise<MP3Tag> {
@@ -17,11 +18,13 @@ export async function getMP3(fileName: string): Promise<MP3Tag> {
 }
 
 export function getTags(mp3: MP3Tag): Tags {
-  return {
+  const tags: Tags = {
     name: mp3.tags.title,
     album: mp3.tags.album,
     artist: mp3.tags.artist,
   };
+  if (mp3.tags.v2?.TSRC) tags.isrc = mp3.tags.v2.TSRC;
+  return tags;
 }
 
 // Returns format, buffer
