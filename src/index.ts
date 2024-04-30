@@ -1,4 +1,4 @@
-import Express from "express";
+import Express, { Request, RequestHandler, Response } from "express";
 import { getFileNames, mapSpotifyToFilePath } from "files";
 import router from "routers/song";
 
@@ -17,6 +17,12 @@ app.get("/", (req, res) => {
 });
 
 app.use(router);
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+app.use((err: Error, _req: Request, res: Response, _next: RequestHandler) => {
+  console.error(err.stack);
+  return res.status(500).send("Something broke!");
+});
 
 app.listen(3000, () => {
   console.log("Server running on port 3000");
