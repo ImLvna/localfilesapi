@@ -5,7 +5,7 @@ import { getImage, getMP3, getTags } from "../util";
 
 const router = express.Router();
 
-router.get(/(spotify:local:[^:]*:[^:]*:[^:]*):\d+/, async (req, res) => {
+router.get(/(spotify:local:[^:]*:[^:]*:[^:]*):\d+$/, async (req, res) => {
   const spotifyUri = req.params[0];
   const fileName = spotifyToFile[spotifyUri];
   if (!fileName) return res.sendStatus(404);
