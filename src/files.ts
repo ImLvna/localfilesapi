@@ -21,7 +21,7 @@ export async function pathToSpotifyUri(path: string) {
   return `spotify:local:${tags.artist}:${tags.album}:${tags.name}`.replace(
     /\s/g,
     "+"
-  ).replace(/\(/g, "%28").replace(/\)/g, "%29")
+  );
 }
 
 export async function mapSpotifyToFilePath() {
